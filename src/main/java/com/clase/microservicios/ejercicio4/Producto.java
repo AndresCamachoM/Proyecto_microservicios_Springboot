@@ -15,13 +15,19 @@ public class Producto implements Pagable, Serializable {
     public double calcularTotal(){
         return this.precio * (double)this.cantidad;
     }
+
+    @Override
+    public double calcularPago() {
+        return 0;
+    }
+
     public double aplicarDescuento(double porcentaje){
         double total = this.calcularTotal();
         return total - (total * porcentaje/100);
     }
 
     public String descripcion(){
-        return String.format("Producto: %s | Precio $%.2f | Cantidad: %d", this.nombre, this.precio, this.cantidad, this.aplicarDescuento(10));
+        return String.format("Producto: %s | Precio $%.2f | Cantidad: %d", this.nombre, this.precio, this.cantidad);
     }
 
     public String getNombre(){
@@ -38,5 +44,10 @@ public class Producto implements Pagable, Serializable {
 
     public String toString(){
         return this.descripcion();
+    }
+
+    @Override
+    public String serializar() {
+        return "";
     }
 }

@@ -16,13 +16,25 @@ public class Servicio implements Pagable, Serializable {
         return this.precioHora = horasTrabajadas;
     }
 
+    @Override
+    public double calcularPago() {
+        return 0;
+    }
+
     public double aplicarDescuento(double porcentaje) {
         double total = this.calcularTotal();
         return total - (total * porcentaje / 100);
     }
 
+    @Override
     public String descripcion() {
-        return String.format("Servicio: %s | Precio/hora: $%.2f  | Total con Descuento : $%.2f", this.descripcion, this, precioHora, this.horasTrabajadas, this.aplicarDescuento(10));
+        return String.format(
+                "Servicio: %s | Precio/hora: $%.2f | Horas: %.1f | Total con descuento: $%.2f",
+                this.descripcion,
+                this.precioHora,
+                this.horasTrabajadas,
+                this.aplicarDescuento(10)
+        );
     }
 
     public String serializar() {
